@@ -143,6 +143,30 @@ namespace VimeoDotNet
             }
         }
 
+        /// <inheritdoc />
+        public async Task<string> CompleteFileUploadAsync(UploadTicket ticket)
+        {
+            ThrowIfUnauthorized();
+
+            try
+            {
+                var request = GenerateCompleteUploadRequest(ticket);
+                var response = await request.ExecuteRequestAsync();
+                CheckStatusCodeError(null, response, "Error marking file upload as complete.");
+
+                return response.Headers.Location?.ToString();
+            }
+            catch (Exception ex)
+            {
+                if (ex is VimeoApiException)
+                {
+                    throw;
+                }
+
+                throw new VimeoUploadException("Error marking file upload as complete.", ex);
+            }
+        }
+
         /// <summary>
         /// Start upload file asynchronously
         /// </summary>
