@@ -366,5 +366,15 @@ namespace VimeoDotNet
             int? perPage = null, GetVideoByTagSort? sort = null, GetVideoByTagDirection? direction = null, string[] fields = null);
 
         #endregion
+
+        #region Presets
+        /// <summary>
+        /// Assign a preset to a video
+        /// </summary>
+        /// <param name="clipId">Clip Id</param>
+        /// <param name="presetId">Preset Id</param>
+        /// <returns>Tag</returns>
+        Task AssignPresetToVideoAsync(long clipId, long presetId);
+        #endregion
     }
 }
