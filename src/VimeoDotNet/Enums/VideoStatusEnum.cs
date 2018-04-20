@@ -11,6 +11,16 @@
         Unknown,
 
         /// <summary>
+        /// Transcoding
+        /// </summary>
+        Transcoding,
+
+        /// <summary>
+        /// Uploading
+        /// </summary>
+        Uploading,
+
+        /// <summary>
         /// Available
         /// </summary>
         Available,
