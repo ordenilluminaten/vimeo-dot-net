@@ -207,6 +207,18 @@ namespace VimeoDotNet
         /// <exception cref="VimeoUploadException"></exception>
         Task<Picture> UploadThumbnailAsync(long clipId, IBinaryContent fileContent);
 
+        /// <summary>
+        /// Marks the file as completed after uploading.
+        /// It can be used when the file has been uploaded from client-side.
+        /// Simple case:
+        /// 1. Generate ticket on server-side
+        /// 2. Send ticket to client-side
+        /// 3. Use ticket to upload entire file to Vimeo (It can be uploaded by chunks, for example)
+        /// 4. After uploading process is complete call this method on server-side
+        /// </summary>
+        /// <param name="ticket">Ticket</param>
+        /// <returns>Clip uri</returns>
+        Task<string> CompleteFileUploadAsync(UploadTicket ticket);
         #endregion
 
         #region Account information
@@ -353,6 +365,16 @@ namespace VimeoDotNet
         Task<Paginated<Video>> GetVideoByTag(string tag,  int? page = null,
             int? perPage = null, GetVideoByTagSort? sort = null, GetVideoByTagDirection? direction = null, string[] fields = null);
 
+        #endregion
+
+        #region Presets
+        /// <summary>
+        /// Assign a preset to a video
+        /// </summary>
+        /// <param name="clipId">Clip Id</param>
+        /// <param name="presetId">Preset Id</param>
+        /// <returns>Tag</returns>
+        Task AssignPresetToVideoAsync(long clipId, long presetId);
         #endregion
     }
 }
